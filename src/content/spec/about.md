@@ -1,9 +1,20 @@
-# About
-This is the demo site for [Fuwari](https://github.com/saicaca/fuwari).
+# Giới thiệu
+Hi mọi người, nơi đây lưu giữ nhật ký hành trình của mình.
 
-::github{repo="saicaca/fuwari"}
+###  Về mình:
+Mình hiện tại là Software Engineer, với ước mơ có thể trở thành một Solution Architecture ^.^~.
 
-> ### Sources of images used in this site
-> - [Unsplash](https://unsplash.com/)
-> - [星と少女](https://www.pixiv.net/artworks/108916539) by [Stella](https://www.pixiv.net/users/93273965)
-> - [Rabbit - v1.4 Showcase](https://civitai.com/posts/586908) by [Rabbit_YourMajesty](https://civitai.com/user/Rabbit_YourMajesty)
+Mặc dù theo đuổi một cuộc sống bình dị, tuy nhiên mình cũng muốn để lại một chút gì đó với cuộc sống.  Mong có thể chia sẻ những kỷ niệm trong công việc và cuộc sống cùng mọi người.
+
+Có thể liên hệ mình qua:
+* Email: trgianghuynhdev1808@gmail.com
+
+### Repo nổi bật:
+::github{repo="trgianghuynh1808/eri-lazyvim-starter"}
+
+::github{repo="trgianghuynh1808/pm2-gui"}
+
+::github{repo="trgianghuynh1808/module-federation-vite-vue3-micro-fe-boilerplate"}
+
+
+::github{repo="trgianghuynh1808/frontend-clean-architecture"}
