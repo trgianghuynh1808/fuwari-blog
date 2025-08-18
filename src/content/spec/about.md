@@ -6,6 +6,8 @@ Mình hiện tại là Software Engineer, với ước mơ có thể trở thàn
 
 Mặc dù theo đuổi một cuộc sống bình dị, tuy nhiên mình cũng muốn để lại một chút gì đó với cuộc sống.  Mong có thể chia sẻ những kỷ niệm trong công việc và cuộc sống cùng mọi người.
 
+Mình sẽ giữ tần suất post bài hằng tuần, khi có thể mình sẽ thực hiện thêm chức năng comment và subscribe để mọi người tiện theo dõi hơn.
+
 Có thể liên hệ mình qua:
 * Email: trgianghuynhdev1808@gmail.com
 
