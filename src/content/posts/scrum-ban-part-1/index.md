@@ -26,10 +26,19 @@ Scrumban kết hợp những đặc điểm nổi bật của Scrum và Kanban t
 
 ### Các yếu tố từ Scrum:
 
-* **Sprint**:
-    * Với Scrum: một Sprint sẽ kéo dài từ *2-4 tuần*, phụ thuộc vào quy mô của mục tiêu trong Sprint.
-    * Với Scrumban: thời gian của Sprint hoặc là Iteration sẽ ngắn hơn *(2 tuần)*. Thời gian Sprint sẽ được fixed, không push thêm ticket khi chưa hoàn thành. Điều này nhằm đảm bảo target Continuos Delivery.
-* **Daily Standup**: thời lượng < 10 phút. Team sẽ xoay quanh 3 câu hỏi: Đã hoàn thành chi? Đang thực hiện chi? Có trở ngại chi không?
-* **Sprint Planning**: xác định rõ target của Sprint và lượng ticket phù hợp với Sprint time.
-* **Role (optional)**: với Scrumban sẽ không chia nhiều vai trò, thông thường sẽ có: Dev Team, Project Manager.
-* **Retrospective (optional)**: về lý thuyết thường retro sẽ được thực hiện vào cuối mỗi end sprint. Tuy nhiên, kinh nghiệm của mình với chu kỳ retro như vậy, hầu như chỉ có thể cải thiện nhanh những vấn đề nhỏ lẻ của Sprint. Đa phần với phát triển phần mềm, mình thấy issue cốt lỗi nằm ở yếu tố con người là chính. Và việc này không thể thay đổi nhanh được. Cá nhân mình suggest, chu kỳ khoảng 2-3 Sprint/lần.
+* **Sprint:**
+    * <u>Với Scrum:</u> một Sprint sẽ kéo dài từ *2-4 tuần*, phụ thuộc vào quy mô của mục tiêu trong Sprint.
+    * <u>Với Scrumban:</u> thời gian của Sprint hoặc là Iteration sẽ ngắn hơn *(2 tuần)*. Thời gian Sprint sẽ được fixed, không push thêm ticket khi chưa hoàn thành. Điều này nhằm đảm bảo target Continuos Delivery.
+* **Daily Standup:** thời lượng < 10 phút. Team sẽ xoay quanh 3 câu hỏi: Đã hoàn thành chi? Đang thực hiện chi? Có trở ngại chi không?
+* **Sprint Planning:** xác định rõ target của Sprint và lượng ticket phù hợp với Sprint time.
+    * <u>Với Scrum:</u> planning phase nhằm đưa ra estimate time cần thiết cho target, từ đó lựa chọn Sprint time phù hợp.
+    * <u>Với Scrumban:</u> trong planning phase cần chốt được số lượng ticket có thể done trong Iteration với một fixed time. \
+    *=> Tăng độ chính xác của estimate time vì chỉ plan trong khoảng thời gian đủ nhỏ.*
+* **Role (optional):** Scrumban sẽ không chia nhiều vai trò, thông thường sẽ có: Dev Team, Project Manager (optional). Vai trò của PM trong Scrumban giúp target đề ra sát với nhu cầu của Project nhất.
+* **Retrospective (optional):** thông thường retro sẽ được thực hiện vào cuối mỗi end sprint. Tuy nhiên, kinh nghiệm của mình với tần suất retro như vậy, hầu như chỉ có thể cải thiện nhanh những vấn đề nhỏ lẻ của Sprint. Đa phần với phát triển phần mềm, mình thấy issue cốt lỗi nằm ở yếu tố con người là chính và việc này không thể thay đổi nhanh được. Cá nhân mình suggest tần suất khoảng 2-3 Sprint/lần.
+
+
+### Các yếu tố từ Kanban:
+
+* **Kanban board:** Scrumban kế thừa Visualize Work của Kanban, có thể tổng quát hóa quy trình làm việc với các trạng thái dễ hình dung hơn (không thuần technical)
+* **Pull system:**
