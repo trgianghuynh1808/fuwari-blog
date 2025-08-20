@@ -30,21 +30,43 @@ try {
     if (fs.existsSync(pagefindJsPath)) {
       console.log('✅ pagefind.js found at:', pagefindJsPath);
 
-      // Step 4: Copy pagefind files to the root of dist to ensure they're accessible
-      console.log('📋 Copying Pagefind files to ensure Vercel deployment...');
+      // Step 4: Copy pagefind files for reliable deployment...
+      console.log('📋 Copying Pagefind files for reliable deployment...');
       try {
-        // Create a copy of pagefind.js in the root of dist
-        const rootPagefindJs = path.join('dist', 'pagefind.js');
-        fs.copyFileSync(pagefindJsPath, rootPagefindJs);
-        console.log('✅ Copied pagefind.js to dist root');
-
-        // Also copy the entire pagefind directory to ensure all files are available
-        const rootPagefindDir = path.join('dist', '_pagefind');
-        if (fs.existsSync(rootPagefindDir)) {
-          fs.rmSync(rootPagefindDir, { recursive: true, force: true });
+        // Copy to public directory (for direct access)
+        const publicPagefindDir = path.join('public', 'pagefind');
+        if (fs.existsSync(publicPagefindDir)) {
+          fs.rmSync(publicPagefindDir, { recursive: true, force: true });
         }
-        fs.cpSync(pagefindDir, rootPagefindDir, { recursive: true });
-        console.log('✅ Copied pagefind directory to dist/_pagefind');
+        fs.cpSync(pagefindDir, publicPagefindDir, { recursive: true });
+        console.log('✅ Copied pagefind directory to public/pagefind');
+
+        // Copy pagefind.js to public root
+        const publicPagefindJs = path.join('public', 'pagefind.js');
+        fs.copyFileSync(pagefindJsPath, publicPagefindJs);
+        console.log('✅ Copied pagefind.js to public root');
+
+        // Copy essential Pagefind files to dist root (Vercel adapter preserves root files)
+        const essentialFiles = [
+          'pagefind-highlight.js',
+          'pagefind-modular-ui.css',
+          'pagefind-modular-ui.js',
+          'pagefind-ui.css',
+          'pagefind-ui.js',
+          'wasm.en.pagefind'
+        ];
+
+        essentialFiles.forEach(file => {
+          const sourceFile = path.join(pagefindDir, file);
+          const destFile = path.join('dist', file);
+          if (fs.existsSync(sourceFile)) {
+            fs.copyFileSync(sourceFile, destFile);
+            console.log(`✅ Copied ${file} to dist root`);
+          }
+        });
+
+        // Copy pagefind.js to dist root (already done by Pagefind)
+        console.log('✅ pagefind.js already in dist root');
 
       } catch (copyError) {
         console.log('⚠️ Warning: Could not copy Pagefind files:', copyError.message);

@@ -104,10 +104,9 @@ function loadButtonScript() {
 loadButtonScript();
 </script>
 
-{import.meta.env.PROD && <script is:inline define:vars={{scriptUrl: url('/pagefind/pagefind.js'), fallbackUrl: url('/pagefind.js')}}>
+{import.meta.env.PROD && <script is:inline define:vars={{scriptUrl: url('/pagefind/pagefind.js')}}>
 async function loadPagefind() {
     try {
-        // Try the main pagefind script first
         const response = await fetch(scriptUrl, { method: 'HEAD' });
         if (!response.ok) {
             throw new Error(`Pagefind script not found: ${response.status}`);
@@ -124,34 +123,13 @@ async function loadPagefind() {
         document.dispatchEvent(new CustomEvent('pagefindready'));
         console.log('Pagefind loaded and initialized successfully, event dispatched.');
     } catch (error) {
-        console.error('Failed to load Pagefind from main path, trying fallback...', error);
-
-        // Try the fallback script
-        try {
-            const fallbackResponse = await fetch(fallbackUrl, { method: 'HEAD' });
-            if (!fallbackResponse.ok) {
-                throw new Error(`Fallback Pagefind script not found: ${fallbackResponse.status}`);
-            }
-
-            const pagefind = await import(fallbackUrl);
-
-            await pagefind.options({
-                excerptLength: 20
-            });
-
-            window.pagefind = pagefind;
-
-            document.dispatchEvent(new CustomEvent('pagefindready'));
-            console.log('Pagefind loaded from fallback successfully, event dispatched.');
-        } catch (fallbackError) {
-            console.error('Failed to load Pagefind from fallback:', fallbackError);
-            window.pagefind = {
-                search: () => Promise.resolve({ results: [] }),
-                options: () => Promise.resolve(),
-            };
-            document.dispatchEvent(new CustomEvent('pagefindloaderror'));
-            console.log('Pagefind load error, event dispatched.');
-        }
+        console.error('Failed to load Pagefind:', error);
+        window.pagefind = {
+            search: () => Promise.resolve({ results: [] }),
+            options: () => Promise.resolve(),
+        };
+        document.dispatchEvent(new CustomEvent('pagefindloaderror'));
+        console.log('Pagefind load error, event dispatched.');
     }
 }
 

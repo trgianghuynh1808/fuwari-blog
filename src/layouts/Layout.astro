@@ -152,21 +152,6 @@ const bannerOffset =
 
 		<!-- Pagefind search script -->
 		    <script src="/pagefind/pagefind.js" defer></script>
-    <script>
-      // Fallback: if the main pagefind script fails, try the root one
-      document.addEventListener('DOMContentLoaded', function() {
-        const script = document.querySelector('script[src="/pagefind/pagefind.js"]');
-        if (script) {
-          script.onerror = function() {
-            console.log('Pagefind script failed to load, trying fallback...');
-            const fallbackScript = document.createElement('script');
-            fallbackScript.src = '/pagefind.js';
-            fallbackScript.defer = true;
-            document.head.appendChild(fallbackScript);
-          };
-        }
-      });
-    </script>
 
 	</head>
 	<body class=" min-h-screen transition " class:list={[{"lg:is-home": isHomePage, "enable-banner": enableBanner}]}
