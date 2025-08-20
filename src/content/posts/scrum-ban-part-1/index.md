@@ -5,7 +5,7 @@ description: "Xu hướng mới trong quy trình phát triển phần mềm ..."
 image: "./scrum-ban.jpg"
 tags: [Scrumban, Development Process]
 category: Project Management
-draft: true
+draft: false
 ---
 
 :::note[Series]
