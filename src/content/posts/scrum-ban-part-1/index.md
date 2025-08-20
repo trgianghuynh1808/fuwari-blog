@@ -1,7 +1,7 @@
 ---
 title: "Scrumban Process - Phần 1: Giới thiệu"
 published: 2025-08-17
-description: "Xu hướng mới trong quy trình phát triển phần mềm, với team size vừa và nhỏ..."
+description: "Xu hướng mới trong quy trình phát triển phần mềm ..."
 image: "./scrum-ban.jpg"
 tags: [Scrumban, Development Process]
 category: Project Management
