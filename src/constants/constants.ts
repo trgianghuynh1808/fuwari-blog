@@ -15,3 +15,5 @@ export const MAIN_PANEL_OVERLAPS_BANNER_HEIGHT = 3.5;
 
 // Page width: rem
 export const PAGE_WIDTH = 75;
+// Blog post detail page width: rem (narrower for better reading experience)
+export const BLOG_POST_WIDTH = 65;

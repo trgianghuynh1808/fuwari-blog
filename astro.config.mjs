@@ -28,7 +28,7 @@ import vercel from "@astrojs/vercel";
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://fuwari.vercel.app/",
+  site: "https://eri-journey-blog.vercel.app/",
   base: "/",
   trailingSlash: "always",
 

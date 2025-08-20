@@ -12,6 +12,8 @@ import {
 	BANNER_HEIGHT,
 	BANNER_HEIGHT_EXTEND,
 	MAIN_PANEL_OVERLAPS_BANNER_HEIGHT,
+	PAGE_WIDTH,
+	BLOG_POST_WIDTH,
 } from "../constants/constants";
 import Layout from "./Layout.astro";
 
@@ -40,7 +42,6 @@ const mainPanelTop = siteConfig.banner.enable
 	? `calc(${BANNER_HEIGHT}vh - ${MAIN_PANEL_OVERLAPS_BANNER_HEIGHT}rem)`
 	: "5.5rem";
 ---
-
 <Layout title={title} banner={banner} description={description} lang={lang} setOGTypeArticle={setOGTypeArticle}>
 
 <!-- Navbar -->
@@ -62,7 +63,7 @@ const mainPanelTop = siteConfig.banner.enable
 <!-- Main content -->
 <div class="absolute w-full z-30 pointer-events-none" style={`top: ${mainPanelTop}`}>
     <!-- The pointer-events-none here prevent blocking the click event of the TOC -->
-    <div class="relative max-w-[var(--page-width)] mx-auto pointer-events-auto">
+    <div class="relative mx-auto pointer-events-auto" style={`max-width: ${PAGE_WIDTH}rem`}>
         <div id="main-grid" class="transition duration-700 w-full left-0 right-0 grid grid-cols-[17.5rem_auto] grid-rows-[auto_1fr_auto] lg:grid-rows-[auto]
     mx-auto gap-4 px-0 md:px-4"
         >
@@ -102,14 +103,55 @@ const mainPanelTop = siteConfig.banner.enable
     </div>
 </div>
 
+<script define:vars={{ BLOG_POST_WIDTH, PAGE_WIDTH }}>
+// Function to apply blog post width dynamically
+function applyBlogPostWidth() {
+    const mainGrid = document.querySelector('#main-grid');
+    const mainGridParent = mainGrid?.parentElement;
+    const tocContainer = document.querySelector('.absolute.w-full.z-0');
+
+    if (mainGridParent) {
+        // Check if current page is a blog post by looking at the URL path
+        const isBlogPost = window.location.pathname.includes('/posts/');
+
+        if (isBlogPost) {
+            // Apply blog post width using BLOG_POST_WIDTH constant
+            mainGridParent.style.maxWidth = `${BLOG_POST_WIDTH}rem`;
+
+        } else {
+            // Apply regular page width using PAGE_WIDTH constant
+            mainGridParent.style.maxWidth = `${PAGE_WIDTH}rem`;
+
+        }
+    }
+}
+
+// Apply width on initial load
+document.addEventListener('DOMContentLoaded', applyBlogPostWidth);
+
+// Apply width on navigation (for Swup)
+if (window?.swup?.hooks) {
+    window.swup.hooks.on('content:replace', applyBlogPostWidth);
+    window.swup.hooks.on('visit:end', applyBlogPostWidth);
+} else {
+    document.addEventListener('swup:enable', () => {
+        window.swup.hooks.on('content:replace', applyBlogPostWidth);
+        window.swup.hooks.on('visit:end', applyBlogPostWidth);
+    });
+}
+
+// Also apply on window resize to ensure consistency
+window.addEventListener('resize', applyBlogPostWidth);
+</script>
+
 <!-- The things that should be under the banner, only the TOC for now -->
-<div class="absolute w-full z-0 hidden 2xl:block">
+<div class="absolute w-full z-0 ">
     <div class="relative max-w-[var(--page-width)] mx-auto">
         <!-- TOC component -->
         {siteConfig.toc.enable && <div id="toc-wrapper" class:list={["hidden lg:block transition absolute top-0 -right-[var(--toc-width)] w-[var(--toc-width)] items-center",
             {"toc-hide": siteConfig.banner.enable}]}
         >
-            <div id="toc-inner-wrapper" class="fixed top-14 w-[var(--toc-width)] h-[calc(100vh_-_20rem)] overflow-y-scroll overflow-x-hidden hide-scrollbar">
+            <div id="toc-inner-wrapper" class="fixed top-14  w-[var(--toc-width)] h-[calc(100vh_-_20rem)] overflow-y-scroll overflow-x-hidden hide-scrollbar">
                 <div id="toc" class="w-full h-full transition-swup-fade ">
                     <div class="h-8 w-full"></div>
                     <TOC headings={headings}></TOC>
