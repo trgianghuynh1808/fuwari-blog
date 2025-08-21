@@ -24,6 +24,7 @@ interface Props {
 	lang?: string;
 	setOGTypeArticle?: boolean;
 	headings?: MarkdownHeading[];
+	canonicalUrl?: string;
 }
 
 const {
@@ -33,6 +34,7 @@ const {
 	lang,
 	setOGTypeArticle,
 	headings = [],
+	canonicalUrl,
 } = Astro.props;
 const hasBannerCredit =
 	siteConfig.banner.enable && siteConfig.banner.credit.enable;
@@ -42,7 +44,7 @@ const mainPanelTop = siteConfig.banner.enable
 	? `calc(${BANNER_HEIGHT}vh - ${MAIN_PANEL_OVERLAPS_BANNER_HEIGHT}rem)`
 	: "5.5rem";
 ---
-<Layout title={title} banner={banner} description={description} lang={lang} setOGTypeArticle={setOGTypeArticle}>
+<Layout title={title} banner={banner} description={description} lang={lang} setOGTypeArticle={setOGTypeArticle} canonicalUrl={canonicalUrl}>
 
 <!-- Navbar -->
 <slot slot="head" name="head"></slot>
