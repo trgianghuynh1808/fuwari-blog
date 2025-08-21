@@ -157,6 +157,30 @@ const bannerOffset =
 		<link rel="alternate" type="application/rss+xml" title={profileConfig.name} href={`${Astro.site}rss.xml`}/>
 		<link rel="sitemap" type="application/xml" title="Sitemap" href={`${Astro.site}sitemap.xml`}/>
 
+		<!-- Website-wide structured data -->
+		<script is:inline type="application/ld+json" set:html={JSON.stringify({
+			"@context": "https://schema.org",
+			"@type": "WebSite",
+			name: siteConfig.title,
+			description: siteConfig.subtitle,
+			url: Astro.site,
+			author: {
+				"@type": "Person",
+				name: profileConfig.name,
+				url: Astro.site,
+			},
+			publisher: {
+				"@type": "Person",
+				name: profileConfig.name,
+				url: Astro.site,
+			},
+			potentialAction: {
+				"@type": "SearchAction",
+				target: `${Astro.site}?s={search_term_string}`,
+				"query-input": "required name=search_term_string"
+			}
+		})}></script>
+
 		<!-- Pagefind search script -->
 		    <script src="/pagefind/pagefind.js" defer></script>
 

@@ -4,11 +4,32 @@ import I18nKey from "@i18n/i18nKey";
 import { i18n } from "@i18n/translation";
 import MainGridLayout from "@layouts/MainGridLayout.astro";
 import { getSortedPostsList } from "../utils/content-utils";
+import { siteConfig, profileConfig } from "../config";
 
 const sortedPostsList = await getSortedPostsList();
+
+const jsonLd = {
+	"@context": "https://schema.org",
+	"@type": "CollectionPage",
+	headline: i18n(I18nKey.archive),
+	description: `${siteConfig.subtitle} - ${i18n(I18nKey.archive)} of all blog posts`,
+	mainEntityOfPage: {
+		"@type": "WebPage",
+		"@id": new URL("/archive", Astro.site).href
+	},
+	author: {
+		"@type": "Person",
+		name: profileConfig.name,
+		url: Astro.site,
+	},
+	datePublished: new Date().toISOString().split('T')[0],
+	dateModified: new Date().toISOString().split('T')[0],
+	numberOfItems: sortedPostsList.length,
+};
 ---
 
 <MainGridLayout title={i18n(I18nKey.archive)} canonicalUrl={new URL("/archive", Astro.site).href}>
+    <script is:inline slot="head" type="application/ld+json" set:html={JSON.stringify(jsonLd)}></script>
     <ArchivePanel sortedPosts={sortedPostsList} client:only="svelte"></ArchivePanel>
 </MainGridLayout>
 
