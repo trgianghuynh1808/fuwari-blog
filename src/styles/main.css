@@ -98,6 +98,30 @@
         @apply w-8 h-8 transition rounded-md flex items-center justify-center bg-[var(--btn-regular-bg)]
         text-[var(--btn-content)] mr-2
     }
+
+    /* Comment styles */
+    .comment-avatar {
+        @apply w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full
+               flex items-center justify-center text-white font-bold text-sm;
+    }
+
+    .comment-input {
+        @apply w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg
+               bg-white dark:bg-gray-800 text-black dark:text-white
+               focus:ring-2 focus:ring-blue-500 focus:border-transparent
+               transition-all;
+    }
+
+    .comment-textarea {
+        @apply w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg
+               bg-white dark:bg-gray-800 text-black dark:text-white
+               focus:ring-2 focus:ring-blue-500 focus:border-transparent
+               transition-all resize-none;
+    }
+
+    .btn-secondary {
+        @apply bg-gray-500 hover:bg-gray-600 text-white font-medium;
+    }
     .with-divider {
         @apply before:content-['/'] before:ml-1.5 before:mr-1.5 before:text-[var(--meta-divider)] before:text-sm
         before:font-medium before:first-of-type:hidden before:transition

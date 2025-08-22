@@ -1,0 +1,19 @@
+---
+import Comments from './Comments.svelte';
+
+export interface Props {
+  postSlug: string;
+}
+
+const { postSlug } = Astro.props;
+---
+
+<div class="comments-container">
+  <Comments client:load postSlug={postSlug} />
+</div>
+
+<style>
+  .comments-container {
+    @apply w-full;
+  }
+</style>
