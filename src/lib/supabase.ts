@@ -21,6 +21,9 @@ export interface Comment {
   post_slug: string
   nickname: string
   content: string
+  avatar_face: string
+  avatar_accessory: string
+  avatar_background: string
   created_at: string
   updated_at: string
 }
@@ -29,4 +32,7 @@ export interface CreateCommentData {
   post_slug: string
   nickname: string
   content: string
+  avatar_face: string
+  avatar_accessory: string
+  avatar_background: string
 }

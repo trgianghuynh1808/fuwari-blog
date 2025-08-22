@@ -46,18 +46,24 @@
     }
   }
 
-  async function addComment() {
-    if (!nickname.trim() || !content.trim()) return;
+        async function addComment() {
+        if (!nickname.trim() || !content.trim()) return;
 
-    try {
-      loading = true;
-      error = '';
+        try {
+          loading = true;
+          error = '';
 
-      const commentData: CreateCommentData = {
-        post_slug: postSlug,
-        nickname: nickname.trim(),
-        content: content.trim()
-      };
+          // Generate and save avatar for this user
+          const avatar = generateChibiAvatar(nickname.trim());
+
+          const commentData: CreateCommentData = {
+            post_slug: postSlug,
+            nickname: nickname.trim(),
+            content: content.trim(),
+            avatar_face: avatar.face,
+            avatar_accessory: avatar.accessory,
+            avatar_background: avatar.background
+          };
 
       const supabase = getSupabaseClient();
       const { data, error: supabaseError } = await supabase
@@ -117,6 +123,31 @@
     if (nickname.trim()) {
       localStorage.setItem('comment-nickname', nickname.trim());
     }
+  }
+
+  // Generate a random chibi avatar based on nickname
+  function generateChibiAvatar(nickname: string): { face: string; accessory: string; background: string } {
+    const chibiParts = {
+      faces: ['😊', '😄', '🤗', '😌', '😋', '🤩', '🥰', '😍', '🤠', '👻', '🐱', '🐰', '🐻', '🐸', '🦊', '🐯', '🦁', '🐮', '🐷', '🐙'],
+      accessories: ['👓', '🎩', '👑', '🎀', '🌸', '⭐', '💫', '✨', '🌟', '💎', '🎪', '🎭', '🎨', '🎵', '🎸', '🎹', '🎺', '🎻', '🥁', '🎤'],
+      backgrounds: ['🌈', '🌺', '🍀', '🌻', '🌹', '🌷', '🌼', '🌸', '🌿', '🍃', '🌱', '🌳', '🌴', '🌵', '🌾', '🌽', '🍎', '🍊', '🍋', '🍇']
+    };
+
+    // Use nickname to generate consistent avatar for same user
+    const hash = nickname.split('').reduce((a, b) => {
+      a = ((a << 5) - a) + b.charCodeAt(0);
+      return a & a;
+    }, 0);
+
+    const faceIndex = Math.abs(hash) % chibiParts.faces.length;
+    const accessoryIndex = Math.abs(hash >> 8) % chibiParts.accessories.length;
+    const backgroundIndex = Math.abs(hash >> 16) % chibiParts.backgrounds.length;
+
+    return {
+      face: chibiParts.faces[faceIndex],
+      accessory: chibiParts.accessories[accessoryIndex],
+      background: chibiParts.backgrounds[backgroundIndex]
+    };
   }
 </script>
 
@@ -218,14 +249,18 @@
       {#each comments as comment (comment.id)}
         <div class="comment-item card-base p-4">
           <div class="flex justify-between items-start mb-2">
-            <div class="flex items-center gap-2">
-              <div class="comment-avatar">
-                {comment.nickname.charAt(0).toUpperCase()}
-              </div>
-              <span class="font-semibold text-black/80 dark:text-white/80">
-                {comment.nickname}
-              </span>
-            </div>
+                              <div class="flex items-center gap-2">
+                    <div class="comment-avatar-chibi">
+                      <div class="chibi-container">
+                        <div class="chibi-background">{comment.avatar_background}</div>
+                        <div class="chibi-face">{comment.avatar_face}</div>
+                        <div class="chibi-accessory">{comment.avatar_accessory}</div>
+                      </div>
+                    </div>
+                    <span class="font-semibold text-black/80 dark:text-white/80">
+                      {comment.nickname}
+                    </span>
+                  </div>
 
           </div>
 
@@ -261,5 +296,25 @@
 
   .btn-primary {
     @apply bg-blue-600 hover:bg-blue-700 text-white font-medium;
+  }
+
+  .comment-avatar-chibi {
+    @apply relative w-12 h-12 flex items-center justify-center;
+  }
+
+  .chibi-container {
+    @apply relative w-full h-full flex items-center justify-center;
+  }
+
+  .chibi-background {
+    @apply absolute inset-0 text-2xl opacity-20;
+  }
+
+  .chibi-face {
+    @apply text-2xl z-10;
+  }
+
+  .chibi-accessory {
+    @apply absolute -top-1 -right-1 text-sm opacity-80;
   }
 </style>
