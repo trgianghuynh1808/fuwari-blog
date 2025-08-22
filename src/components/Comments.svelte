@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import { supabase, type Comment, type CreateCommentData } from '../lib/supabase';
+  import { getSupabaseClient, type Comment, type CreateCommentData } from '../lib/supabase';
   import { i18n } from '../i18n/translation';
   import Key from '../i18n/i18nKey';
 
@@ -23,6 +23,7 @@
       loading = true;
       error = '';
 
+      const supabase = getSupabaseClient();
       const { data, error: supabaseError } = await supabase
         .from('comments')
         .select('*')
@@ -58,6 +59,7 @@
         content: content.trim()
       };
 
+      const supabase = getSupabaseClient();
       const { data, error: supabaseError } = await supabase
         .from('comments')
         .insert([commentData])
@@ -90,6 +92,7 @@
 
   async function deleteComment(id: string) {
     try {
+      const supabase = getSupabaseClient();
       const { error: supabaseError } = await supabase
         .from('comments')
         .delete()
