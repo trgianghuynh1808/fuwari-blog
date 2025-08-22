@@ -90,26 +90,7 @@
     }
   }
 
-  async function deleteComment(id: string) {
-    try {
-      const supabase = getSupabaseClient();
-      const { error: supabaseError } = await supabase
-        .from('comments')
-        .delete()
-        .eq('id', id);
 
-      if (supabaseError) {
-        console.error('Supabase error:', supabaseError);
-        error = i18n(Key.failedToDeleteComment);
-        return;
-      }
-
-      comments = comments.filter(c => c.id !== id);
-    } catch (err) {
-              error = i18n(Key.failedToDeleteComment);
-      console.error('Error deleting comment:', err);
-    }
-  }
 
   function formatDate(dateString: string) {
     return new Date(dateString).toLocaleDateString('en-US', {
@@ -245,14 +226,7 @@
                 {comment.nickname}
               </span>
             </div>
-            <button
-              on:click={() => deleteComment(comment.id)}
-              class="text-red-500 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300
-                     transition-colors p-1 rounded"
-              title={i18n(Key.deleteComment)}
-            >
-              <span class="w-4 h-4 text-sm">🗑️</span>
-            </button>
+
           </div>
 
           <p class="text-black/80 dark:text-white/80 mb-2 leading-relaxed">
