@@ -3,9 +3,10 @@ import CommentCount from "./CommentCount.svelte";
 
 export interface Props {
   postSlug: string;
+  isListPage?: boolean;
 }
 
-const { postSlug } = Astro.props;
+const { postSlug, isListPage = false } = Astro.props;
 ---
 
-<CommentCount postSlug={postSlug} client:load />
+<CommentCount postSlug={postSlug} isListPage={isListPage} client:load />

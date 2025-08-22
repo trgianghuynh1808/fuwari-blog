@@ -28,6 +28,8 @@ export const en: Translation = {
 	[Key.failedToPostComment]: "Failed to post comment",
 	[Key.commentCount]: "comment",
 	[Key.commentsCount]: "comments",
+	[Key.scrollToComments]: "Scroll to comments",
+	[Key.viewPost]: "View post",
 
 
 	[Key.untitled]: "Untitled",

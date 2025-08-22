@@ -28,6 +28,8 @@ export const vi: Translation = {
 	[Key.failedToPostComment]: "Không thể đăng bình luận",
 	[Key.commentCount]: "bình luận",
 	[Key.commentsCount]: "bình luận",
+	[Key.scrollToComments]: "Cuộn đến phần bình luận",
+	[Key.viewPost]: "Xem bài viết",
 
 
 	[Key.untitled]: "Không tiêu đề",

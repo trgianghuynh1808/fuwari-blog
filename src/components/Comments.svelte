@@ -158,7 +158,7 @@
   }
 </script>
 
-<div class="comments-section">
+<div id="comments-section" class="comments-section">
   <div class="comments-header">
             <h3 class="text-xl font-bold text-black/90 dark:text-white/90 mb-4">
           {i18n(Key.comments)} ({comments.length})

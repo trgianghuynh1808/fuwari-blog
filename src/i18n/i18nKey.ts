@@ -25,6 +25,8 @@ enum I18nKey {
 	failedToPostComment = "failedToPostComment",
 	commentCount = "commentCount",
 	commentsCount = "commentsCount",
+	scrollToComments = "scrollToComments",
+	viewPost = "viewPost",
 
 
 	untitled = "untitled",

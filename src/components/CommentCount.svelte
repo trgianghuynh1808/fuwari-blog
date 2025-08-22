@@ -4,7 +4,8 @@
   import { i18n } from '../i18n/translation';
   import Key from '../i18n/i18nKey';
 
-  export let postSlug: string;
+    export let postSlug: string;
+  export let isListPage: boolean = false;
 
   let commentCount = 0;
   let loading = true;
@@ -13,6 +14,23 @@
   // Function to manually refresh comment count
   export function refresh() {
     loadCommentCount();
+  }
+
+  // Function to handle comment count click
+  function handleCommentCountClick() {
+    if (isListPage) {
+      // On list pages, navigate to the post details page
+      window.location.href = `/posts/${postSlug}/`;
+    } else {
+      // On detail pages, scroll to comment section
+      const commentSection = document.getElementById('comments-section');
+      if (commentSection) {
+        commentSection.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
+    }
   }
 
   async function loadCommentCount() {
@@ -59,11 +77,16 @@
 </script>
 
 {#if loading}
-  <span class="text-black/30 dark:text-white/30">...</span>
+  <span class="text-black/30 dark:text-white/30 cursor-default">...</span>
 {:else if error}
-  <span class="text-black/30 dark:text-white/30">0</span>
+  <span class="text-black/30 dark:text-white/30 cursor-default">0</span>
 {:else}
-  <span class="text-black/30 dark:text-white/30">
-    {commentCount} {" " + i18n(commentCount === 1 ? Key.commentCount : Key.commentsCount)}
-  </span>
+  <button
+    on:click={() => handleCommentCountClick()}
+    class="text-black/30 dark:text-white/30 hover:text-black/50 dark:hover:text-white/50 transition-colors cursor-pointer flex items-center gap-1 group"
+    title={isListPage ? i18n(Key.viewPost) : i18n(Key.scrollToComments)}
+  >
+    <span>{commentCount} {" " + i18n(commentCount === 1 ? Key.commentCount : Key.commentsCount)}</span>
+    <span class="opacity-0 group-hover:opacity-100 transition-opacity text-xs">↓</span>
+  </button>
 {/if}
