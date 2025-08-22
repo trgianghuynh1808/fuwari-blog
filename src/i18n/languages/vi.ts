@@ -26,6 +26,8 @@ export const vi: Translation = {
 	[Key.allFieldsRequired]: "Tất cả các trường đều bắt buộc",
 	[Key.failedToLoadComments]: "Không thể tải bình luận",
 	[Key.failedToPostComment]: "Không thể đăng bình luận",
+	[Key.commentCount]: "bình luận",
+	[Key.commentsCount]: "bình luận",
 
 
 	[Key.untitled]: "Không tiêu đề",

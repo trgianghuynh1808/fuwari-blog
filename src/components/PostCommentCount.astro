@@ -1,0 +1,11 @@
+---
+import CommentCount from "./CommentCount.svelte";
+
+export interface Props {
+  postSlug: string;
+}
+
+const { postSlug } = Astro.props;
+---
+
+<CommentCount postSlug={postSlug} client:load />

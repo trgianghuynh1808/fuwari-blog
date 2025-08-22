@@ -78,16 +78,23 @@
         return;
       }
 
-      if (data) {
-        comments = [data, ...comments];
+                if (data) {
+            comments = [data, ...comments];
 
-        // Reset form
-        content = '';
-        showForm = false;
+            // Reset form
+            content = '';
+            showForm = false;
 
-        // Save nickname for future use
-        saveNickname();
-      }
+            // Save nickname for future use
+            saveNickname();
+
+            // Dispatch custom event to notify comment count components
+            if (typeof window !== 'undefined') {
+              window.dispatchEvent(new CustomEvent('comment-added', {
+                detail: { postSlug, commentCount: comments.length }
+              }));
+            }
+          }
     } catch (err) {
       error = i18n(Key.failedToPostComment);
       console.error('Error posting comment:', err);

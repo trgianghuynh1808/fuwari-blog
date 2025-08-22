@@ -23,6 +23,8 @@ enum I18nKey {
 	allFieldsRequired = "allFieldsRequired",
 	failedToLoadComments = "failedToLoadComments",
 	failedToPostComment = "failedToPostComment",
+	commentCount = "commentCount",
+	commentsCount = "commentsCount",
 
 
 	untitled = "untitled",

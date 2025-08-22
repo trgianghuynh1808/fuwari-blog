@@ -26,6 +26,8 @@ export const en: Translation = {
 	[Key.allFieldsRequired]: "All fields are required",
 	[Key.failedToLoadComments]: "Failed to load comments",
 	[Key.failedToPostComment]: "Failed to post comment",
+	[Key.commentCount]: "comment",
+	[Key.commentsCount]: "comments",
 
 
 	[Key.untitled]: "Untitled",

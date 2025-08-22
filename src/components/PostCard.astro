@@ -7,6 +7,7 @@ import { i18n } from "../i18n/translation";
 import { getDir } from "../utils/url-utils";
 import ImageWrapper from "./misc/ImageWrapper.astro";
 import PostMetadata from "./PostMeta.astro";
+import PostCommentCount from "./PostCommentCount.astro";
 
 interface Props {
 	class?: string;
@@ -21,6 +22,7 @@ interface Props {
 	description: string;
 	draft: boolean;
 	style: string;
+
 }
 const {
 	entry,
@@ -33,6 +35,7 @@ const {
 	image,
 	description,
 	style,
+
 } = Astro.props;
 const className = Astro.props.class;
 
@@ -64,7 +67,7 @@ const { remarkPluginFrontmatter } = await entry.render();
             { description || remarkPluginFrontmatter.excerpt }
         </div>
 
-        <!-- word count and read time  -->
+        <!-- word count, read time, and comment count -->
         <div class="text-sm text-black/30 dark:text-white/30 flex gap-4 transition">
             <div>
                 {remarkPluginFrontmatter.words} {" " + i18n(remarkPluginFrontmatter.words === 1 ? I18nKey.wordCount : I18nKey.wordsCount)}
@@ -72,6 +75,10 @@ const { remarkPluginFrontmatter } = await entry.render();
             <div>|</div>
             <div>
                 {remarkPluginFrontmatter.minutes} {" " + i18n(remarkPluginFrontmatter.minutes === 1 ? I18nKey.minuteCount : I18nKey.minutesCount)}
+            </div>
+            <div>|</div>
+            <div>
+                <PostCommentCount postSlug={entry.slug} />
             </div>
         </div>
 
