@@ -49,7 +49,7 @@ Không chỉ đơn thuần là đưa ra quyết định những gì sẽ thực 
 ***Sứ mệnh của người control là giúp cho quá trình vận hành được suôn sẻ nhất có thể và giảm thiếu áp lực cho các bên.***
 :::
 
-* **Work-in-progress (WIP) limit**: set limit progress ở từng phase, vì Kanban là visualize quy trình sản suất -> các trạng thái của ticket sẽ được đảm nhiệm ở từng vai trò. Khi số lượng ticket ở vai trò đó quá nhiều, sẽ gây hiện tượng nghẹn cổ chai. Về lâu dài sẽ ảnh hưởng tới mental health của member.
+* **Work-in-progress (WIP) limit**: set limit progress ở từng phase, vì Kanban là visualize quy trình sản suất -> các trạng thái của ticket sẽ được đảm nhiệm ở từng vai trò. Khi số lượng ticket ở vai trò đó quá nhiều, sẽ gây hiện tượng nghẽn cổ chai. Về lâu dài sẽ ảnh hưởng tới mental health của member.
 
 * **Continuous workflow**: với Scrum cần hoàn thành hết các ticket trong Sprint, Scrumban cho phép quy trình được thực thi liên tục. Nghĩa là, khi kết thúc Sprint không buộc toàn bộ ticket phải đi hết tới quy trình cuối cùng. Có thể ở Sprint đó vẫn còn một số Ticket đang chờ delivery...
 
