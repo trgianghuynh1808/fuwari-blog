@@ -3,7 +3,7 @@ import { PAGE_SIZE } from "@constants/constants";
 import type { APIContext } from "astro";
 
 export async function GET(context: APIContext) {
-	const site = context.site ?? "https://eri-journey-blog.vercel.app";
+	const site = context.site ?? "https://www.eri-journey.dev";
 	const posts = await getSortedPosts();
 	const categories = await getCategoryList();
 	const tags = await getTagList();
@@ -28,12 +28,12 @@ export async function GET(context: APIContext) {
 	const cleanUrl = (path: string) => {
 		const siteUrl = typeof site === 'string' ? site : site.href;
 		const baseUrl = siteUrl.endsWith('/') ? siteUrl.slice(0, -1) : siteUrl;
-		
+
 		// Handle homepage case - ensure it ends with trailing slash
 		if (path === '') {
 			return `${baseUrl}/`;
 		}
-		
+
 		const cleanPath = path.startsWith('/') ? path.slice(1) : path;
 		return `${baseUrl}/${cleanPath}`;
 	};
