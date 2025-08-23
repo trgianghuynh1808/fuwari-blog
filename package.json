@@ -3,10 +3,11 @@
   "type": "module",
   "version": "0.0.1",
   "scripts": {
-    "dev": "astro dev",
+    "dev": "npm run prebuild && astro dev",
     "start": "astro dev",
     "check": "astro check",
-    "build": "astro build && pagefind --site dist --force-language en",
+    "prebuild": "node scripts/copy-post-images.js",
+    "build": "npm run prebuild && astro build && pagefind --site dist --force-language en",
     "vercel-build": "node vercel-build.cjs",
     "preview": "astro preview",
     "astro": "astro",
