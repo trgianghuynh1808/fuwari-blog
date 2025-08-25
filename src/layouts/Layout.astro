@@ -67,8 +67,8 @@ const bannerOffsetByPosition = {
 	center: `${BANNER_HEIGHT_EXTEND / 2}vh`,
 	bottom: "0",
 };
-const bannerOffset =
-	bannerOffsetByPosition[siteConfig.banner.position || "center"];
+const bannerPosition = siteConfig.banner.position || "center";
+const bannerOffset = bannerOffsetByPosition[bannerPosition as keyof typeof bannerOffsetByPosition];
 ---
 
 <!DOCTYPE html>
@@ -123,6 +123,12 @@ const bannerOffset =
 		<meta name="google-site-verification" content="4Ty1LeyCB93zC_iJ9YIWW4VelpXI_fZW4dU41ZE91Vk" />
 		<meta name="robots" content="index, follow">
 		{canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
+		{canonicalUrl && (
+			<>
+				<link rel="alternate" hreflang="x-default" href={canonicalUrl} />
+				<link rel="alternate" hreflang={siteLang} href={canonicalUrl} />
+			</>
+		)}
 
 		<!-- Set the theme before the page is rendered to avoid a flash -->
 		<script is:inline define:vars={{DEFAULT_THEME, LIGHT_MODE, DARK_MODE, AUTO_MODE, BANNER_HEIGHT_EXTEND, PAGE_WIDTH, configHue}}>

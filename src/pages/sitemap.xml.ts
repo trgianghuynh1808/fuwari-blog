@@ -3,7 +3,7 @@ import { PAGE_SIZE } from "@constants/constants";
 import type { APIContext } from "astro";
 
 export async function GET(context: APIContext) {
-	const site = context.site ?? "https://www.eri-journey.dev";
+	const site = context.site ?? "https://www.eri-journey.dev/";
 	const posts = await getSortedPosts();
 	const categories = await getCategoryList();
 	const tags = await getTagList();
