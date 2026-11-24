@@ -4,7 +4,7 @@ Hi mọi người, nơi đây lưu giữ hành trình của mình.
 
 ### Về mình:
 
-Mình hiện tại là Software Engineer, Scrum Master và "Thầy Đồ" part time. Mình đang hướng tới phát triển ở khía cạnh Architecture. Phần lớn các bài viết của mình sẽ quay quanh các chủ đề ở những vai trò trên ✨.
+Mình là một Software Engineer, mình tập viết lại những gì mình đã được biết, suy nghĩ cảm xúc của cá nhân mình tại đây. Cảm ơn mọi người đã quan tâm và tham gia.
 
 Bản thân mình học được rất nhiều từ văn hóa chia sẻ của các tiền bối đi trước. Đó cũng là một nguồn cảm hứng để mình tiếp nối giá trị ấy. Mong muốn có thể để lại một chút gì đó với cuộc sống và chia sẻ cùng mọi người.
 
