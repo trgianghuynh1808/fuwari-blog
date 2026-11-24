@@ -25,11 +25,12 @@ CÚ PHÁP RIÊNG CỦA FUWARI (khối comment này không hiện trên site, xó
 Ảnh (đặt ảnh cùng thư mục với index.md, đặt tên không dấu cách):
   ![mô tả](./ten-anh.png "chú thích hiện dưới ảnh")
 
-Hộp chú thích (note | tip | important | caution | warning):
-  :::note
-  Nội dung
-  :::
+Hộp chú thích (ưu tiên dạng này, Obsidian và site đều hiển thị):
+  > [!NOTE]
+  > Nội dung
+  Các loại: NOTE | TIP | IMPORTANT | WARNING | CAUTION
 
+  Dạng riêng của Fuwari (chỉ chạy trên site, có tiêu đề tùy chỉnh):
   :::tip[Tiêu đề tùy chỉnh]
   Nội dung
   :::
