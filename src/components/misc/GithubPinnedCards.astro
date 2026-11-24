@@ -1,0 +1,83 @@
+---
+import { getPinnedRepos } from "../../utils/github-pinned";
+
+// Shown only when the GitHub API is unavailable at build time
+const fallback = [
+	"trgianghuynh1808/eri-lazyvim-starter",
+	"trgianghuynh1808/pm2-gui",
+	"trgianghuynh1808/module-federation-vite-vue3-micro-fe-boilerplate",
+	"trgianghuynh1808/frontend-clean-architecture",
+];
+
+const pinned = await getPinnedRepos();
+
+const compact = (n: number) =>
+	Intl.NumberFormat("en-us", { notation: "compact", maximumFractionDigits: 1 })
+		.format(n)
+		.replaceAll(" ", "");
+---
+{pinned.length > 0 ? pinned.map((r) => (
+	<a class="card-github no-styling" href={`https://github.com/${r.repo}`} target="_blank" rel="noopener" repo={r.repo}>
+		<div class="gc-titlebar">
+			<div class="gc-titlebar-left">
+				<div class="gc-owner">
+					<div class="gc-avatar" style={r.avatar ? `background-image: url(${r.avatar}); background-color: transparent;` : undefined}></div>
+					<div class="gc-user">{r.repo.split("/")[0]}</div>
+				</div>
+				<div class="gc-divider">/</div>
+				<div class="gc-repo">{r.repo.split("/")[1]}</div>
+			</div>
+			<div class="github-logo"></div>
+		</div>
+		<div class="gc-description">{r.description?.replace(/:[a-zA-Z0-9_]+:/g, "") || "Description not set"}</div>
+		<div class="gc-infobar">
+			<div class="gc-stars">{compact(r.stars)}</div>
+			<div class="gc-forks">{compact(r.forks)}</div>
+			<div class="gc-license">{r.license ?? "no-license"}</div>
+			<span class="gc-language">{r.language ?? ""}</span>
+		</div>
+	</a>
+)) : fallback.map((repo) => (
+	<a class="card-github fetch-waiting no-styling" href={`https://github.com/${repo}`} target="_blank" rel="noopener" repo={repo} data-gh-repo={repo}>
+		<div class="gc-titlebar">
+			<div class="gc-titlebar-left">
+				<div class="gc-owner">
+					<div class="gc-avatar" data-gh="avatar"></div>
+					<div class="gc-user">{repo.split("/")[0]}</div>
+				</div>
+				<div class="gc-divider">/</div>
+				<div class="gc-repo">{repo.split("/")[1]}</div>
+			</div>
+			<div class="github-logo"></div>
+		</div>
+		<div class="gc-description" data-gh="description">Waiting for api.github.com...</div>
+		<div class="gc-infobar">
+			<div class="gc-stars" data-gh="stars">00K</div>
+			<div class="gc-forks" data-gh="forks">0K</div>
+			<div class="gc-license" data-gh="license">0K</div>
+			<span class="gc-language" data-gh="language">Waiting...</span>
+		</div>
+	</a>
+))}
+{pinned.length === 0 && (
+	<script is:inline>
+		document.querySelectorAll("a[data-gh-repo]").forEach((card) => {
+			const q = (k) => card.querySelector(`[data-gh="${k}"]`);
+			const fmt = (n) => Intl.NumberFormat("en-us", { notation: "compact", maximumFractionDigits: 1 }).format(n).replaceAll(" ", "");
+			fetch(`https://api.github.com/repos/${card.dataset.ghRepo}`, { referrerPolicy: "no-referrer" })
+				.then((r) => r.json())
+				.then((d) => {
+					q("description").innerText = d.description?.replace(/:[a-zA-Z0-9_]+:/g, "") || "Description not set";
+					q("language").innerText = d.language;
+					q("forks").innerText = fmt(d.forks);
+					q("stars").innerText = fmt(d.stargazers_count);
+					q("license").innerText = d.license?.spdx_id || "no-license";
+					const a = q("avatar");
+					a.style.backgroundImage = `url(${d.owner.avatar_url})`;
+					a.style.backgroundColor = "transparent";
+					card.classList.remove("fetch-waiting");
+				})
+				.catch(() => card.classList.add("fetch-error"));
+		});
+	</script>
+)}

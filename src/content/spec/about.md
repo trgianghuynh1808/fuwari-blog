@@ -13,5 +13,3 @@ Có thể liên hệ mình qua:
 - Email 📮: trgianghuynhdev1808@gmail.com
 
 ### Repo nổi bật:
-
-::github-pinned{fallback="trgianghuynh1808/eri-lazyvim-starter,trgianghuynh1808/pm2-gui,trgianghuynh1808/module-federation-vite-vue3-micro-fe-boilerplate,trgianghuynh1808/frontend-clean-architecture"}
