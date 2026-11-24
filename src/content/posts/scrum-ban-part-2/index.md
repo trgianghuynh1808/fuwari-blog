@@ -21,7 +21,7 @@ Mình sẽ chia thành nhiều phần, để mọi người dễ đọc hơn. Se
 
 ## Scrumban Workflow
 
-![Scrumban workflow](./flow-sketchnote.png "Scrumban workflow")
+![Scrumban workflow](./flow-diagram.png "Scrumban workflow")
 
 Ở hình trên, mình mô tả full workflow của Srumban, bên cạnh đó mình có để một số "Ghi chú" để bổ sung thông tin, nhầm quá trình vận hành trong dự án thực tế sẽ rõ ràng hơn.
 
