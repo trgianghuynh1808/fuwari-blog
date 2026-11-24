@@ -4,9 +4,9 @@ Hi mọi người, nơi đây lưu giữ hành trình của mình.
 
 ### Về mình:
 
-Mình là một Software Engineer, mình tập viết lại những gì mình đã được biết, suy nghĩ cảm xúc của cá nhân mình tại đây. Cảm ơn mọi người đã quan tâm và tham gia.
+Mình là một Software Engineer. Blog này là nơi mình ghi lại những điều đã học, cùng những suy nghĩ và cảm xúc của riêng mình.
 
-Bản thân mình học được rất nhiều từ văn hóa chia sẻ của các tiền bối đi trước. Đó cũng là một nguồn cảm hứng để mình tiếp nối giá trị ấy. Mong muốn có thể để lại một chút gì đó với cuộc sống và chia sẻ cùng mọi người.
+Mình học được rất nhiều từ văn hóa chia sẻ của các anh chị đi trước, và đó cũng là động lực để mình tiếp nối. Mong rằng những gì mình viết ra có thể hữu ích với ai đó. Cảm ơn bạn đã ghé qua!
 
 Có thể liên hệ mình qua:
 
