@@ -10,6 +10,6 @@ jobs:
     steps:
       - name: Ping site
         run: |
-          curl -f -s -L --max-time 30 --connect-timeout 10 https://www.blog.eridev.asia// > /dev/null || exit 1
+          curl -f -s -L --max-time 30 --connect-timeout 10 https://www.blog.eridev.asia/ > /dev/null || exit 1
           echo "Site pinged successfully at $(date)"
         timeout-minutes: 2
