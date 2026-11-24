@@ -1,9 +1,11 @@
 ---
 title: "Scrumban Process - Phần 1: Giới thiệu"
-published: 2025-11-01
-description: "Scrumban là gì? Vì sao Scrumban đang trở thành xu hướng..."
-image: "./scrum-ban.jpg"
-tags: [Scrumban, Development Process]
+published: 2026-11-01
+description: Scrumban là gì? Vì sao Scrumban đang trở thành xu hướng...
+image: ./scrum-ban.jpg
+tags:
+  - Scrumban
+  - Development Process
 category: Project Management
 draft: false
 ---

@@ -1,9 +1,11 @@
 ---
 title: "Scrumban Process - Phần 2: Work flow và các yếu tố ảnh hưởng trong vận hành"
-published: 2025-11-14
-description: "Chi tiết cách vận hành Scrumban và những vấn đề gặp phải ..."
-image: "./thumbnail.jpg"
-tags: [Scrumban, Development Process]
+published: 2026-11-14
+description: Chi tiết cách vận hành Scrumban và những vấn đề gặp phải ...
+image: ./thumbnail.jpg
+tags:
+  - Scrumban
+  - Development Process
 category: Project Management
 draft: false
 ---
