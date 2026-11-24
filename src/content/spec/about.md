@@ -14,10 +14,4 @@ Có thể liên hệ mình qua:
 
 ### Repo nổi bật:
 
-::github{repo="trgianghuynh1808/eri-lazyvim-starter"}
-
-::github{repo="trgianghuynh1808/pm2-gui"}
-
-::github{repo="trgianghuynh1808/module-federation-vite-vue3-micro-fe-boilerplate"}
-
-::github{repo="trgianghuynh1808/frontend-clean-architecture"}
+::github-pinned{fallback="trgianghuynh1808/eri-lazyvim-starter,trgianghuynh1808/pm2-gui,trgianghuynh1808/module-federation-vite-vue3-micro-fe-boilerplate,trgianghuynh1808/frontend-clean-architecture"}
