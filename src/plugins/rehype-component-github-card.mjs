@@ -23,13 +23,34 @@ export function GithubCardComponent(properties, children) {
 		);
 
 	const repo = properties.repo;
+
+	// Build-time data (from remark-github-pinned) avoids client-side API rate limits
+	let prefetched = null;
+	if (properties.data) {
+		try {
+			prefetched = JSON.parse(properties.data);
+		} catch {
+			prefetched = null;
+		}
+	}
+	const compact = (n) =>
+		Intl.NumberFormat("en-us", { notation: "compact", maximumFractionDigits: 1 })
+			.format(n)
+			.replaceAll("\u202f", "");
 	const cardUuid = `GC${Math.random().toString(36).slice(-6)}`; // Collisions are not important
 
-	const nAvatar = h(`div#${cardUuid}-avatar`, { class: "gc-avatar" });
+	const nAvatar = h(`div#${cardUuid}-avatar`, {
+		class: "gc-avatar",
+		...(prefetched?.avatar
+			? {
+					style: `background-image: url(${prefetched.avatar}); background-color: transparent;`,
+				}
+			: {}),
+	});
 	const nLanguage = h(
 		`span#${cardUuid}-language`,
 		{ class: "gc-language" },
-		"Waiting...",
+		prefetched ? (prefetched.language ?? "") : "Waiting...",
 	);
 
 	const nTitle = h("div", { class: "gc-titlebar" }, [
@@ -47,12 +68,27 @@ export function GithubCardComponent(properties, children) {
 	const nDescription = h(
 		`div#${cardUuid}-description`,
 		{ class: "gc-description" },
-		"Waiting for api.github.com...",
+		prefetched
+			? (prefetched.description?.replace(/:[a-zA-Z0-9_]+:/g, "") ||
+				"Description not set")
+			: "Waiting for api.github.com...",
 	);
 
-	const nStars = h(`div#${cardUuid}-stars`, { class: "gc-stars" }, "00K");
-	const nForks = h(`div#${cardUuid}-forks`, { class: "gc-forks" }, "0K");
-	const nLicense = h(`div#${cardUuid}-license`, { class: "gc-license" }, "0K");
+	const nStars = h(
+		`div#${cardUuid}-stars`,
+		{ class: "gc-stars" },
+		prefetched ? compact(prefetched.stars) : "00K",
+	);
+	const nForks = h(
+		`div#${cardUuid}-forks`,
+		{ class: "gc-forks" },
+		prefetched ? compact(prefetched.forks) : "0K",
+	);
+	const nLicense = h(
+		`div#${cardUuid}-license`,
+		{ class: "gc-license" },
+		prefetched ? (prefetched.license ?? "no-license") : "0K",
+	);
 
 	const nScript = h(
 		`script#${cardUuid}-script`,
@@ -80,7 +116,7 @@ export function GithubCardComponent(properties, children) {
 	return h(
 		`a#${cardUuid}-card`,
 		{
-			class: "card-github fetch-waiting no-styling",
+			class: `card-github ${prefetched ? "" : "fetch-waiting "}no-styling`,
 			href: `https://github.com/${repo}`,
 			target: "_blank",
 			repo,
@@ -89,7 +125,7 @@ export function GithubCardComponent(properties, children) {
 			nTitle,
 			nDescription,
 			h("div", { class: "gc-infobar" }, [nStars, nForks, nLicense, nLanguage]),
-			nScript,
+			...(prefetched ? [] : [nScript]),
 		],
 	);
 }

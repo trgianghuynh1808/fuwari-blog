@@ -4,7 +4,17 @@ const QUERY = `
 query ($login: String!) {
   user(login: $login) {
     pinnedItems(first: 6, types: REPOSITORY) {
-      nodes { ... on Repository { nameWithOwner } }
+      nodes {
+        ... on Repository {
+          nameWithOwner
+          description
+          stargazerCount
+          forkCount
+          primaryLanguage { name }
+          licenseInfo { spdxId }
+          owner { avatarUrl }
+        }
+      }
     }
   }
 }`;
@@ -22,7 +32,20 @@ async function fetchPinnedRepos(login, token) {
 	if (!res.ok) throw new Error(`GitHub API responded ${res.status}`);
 	const json = await res.json();
 	const nodes = json?.data?.user?.pinnedItems?.nodes ?? [];
-	return nodes.map((n) => n.nameWithOwner).filter(Boolean);
+	return nodes
+		.filter((n) => n?.nameWithOwner)
+		.map((n) => ({
+			repo: n.nameWithOwner,
+			// Prefetched at build time so visitors don't hit the unauthenticated GitHub API
+			data: {
+				description: n.description ?? null,
+				language: n.primaryLanguage?.name ?? null,
+				stars: n.stargazerCount ?? 0,
+				forks: n.forkCount ?? 0,
+				license: n.licenseInfo?.spdxId ?? null,
+				avatar: n.owner?.avatarUrl ?? null,
+			},
+		}));
 }
 
 /**
@@ -58,11 +81,14 @@ export function remarkGithubPinned() {
 				.split(",")
 				.map((s) => s.trim())
 				.filter(Boolean);
-			const repos = pinned.length > 0 ? pinned : fallback;
-			const cards = repos.map((repo) => ({
+			const repos =
+				pinned.length > 0
+					? pinned
+					: fallback.map((repo) => ({ repo, data: null }));
+			const cards = repos.map(({ repo, data }) => ({
 				type: "leafDirective",
 				name: "github",
-				attributes: { repo },
+				attributes: data ? { repo, data: JSON.stringify(data) } : { repo },
 				children: [],
 			}));
 			const i = parent.children.indexOf(node);
