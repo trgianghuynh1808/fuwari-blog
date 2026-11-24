@@ -7,7 +7,6 @@ import swup from "@swup/astro";
 import expressiveCode from "astro-expressive-code";
 import icon from "astro-icon";
 import { defineConfig } from "astro/config";
-import { loadEnv } from "vite";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeComponents from "rehype-components";/* Render the custom directive content */
 import rehypeKatex from "rehype-katex";
@@ -27,8 +26,15 @@ import { pluginCustomCopyButton } from "./src/plugins/expressive-code/custom-cop
 
 import vercel from "@astrojs/vercel";
 
-const env = loadEnv(process.env.NODE_ENV ?? "production", process.cwd(), "");
-const SITE_URL = process.env.SITE_URL || env.SITE_URL || "https://blog.eridev.asia/";
+// Load local .env files (Vercel injects env vars into process.env directly)
+for (const file of [".env.local", ".env"]) {
+  try {
+    process.loadEnvFile(file);
+  } catch {
+    // file not found, ignore
+  }
+}
+const SITE_URL = process.env.SITE_URL || "https://blog.eridev.asia/";
 
 // https://astro.build/config
 export default defineConfig({
